@@ -1,0 +1,57 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "macro-regime-classifier"
+version = "0.1.0"
+description = "ML toolkit for classifying macro market regimes from cross-asset signals."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "Avi Asthana", email = "aviasthana@gmail.com" }]
+keywords = ["quantitative-finance", "machine-learning", "macro", "trading"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Topic :: Office/Business :: Financial :: Investment",
+]
+dependencies = [
+  "numpy>=1.26,<3",
+  "pandas>=2.2,<3",
+  "scikit-learn>=1.5,<2",
+  "hmmlearn>=0.3,<0.4",
+  "pydantic>=2.9,<3",
+  "pydantic-settings>=2.5,<3",
+]
+
+[project.optional-dependencies]
+dev = [
+  "mypy>=1.15,<2",
+  "pytest>=8.3,<10",
+  "pytest-cov>=6,<8",
+  "ruff>=0.11,<1",
+]
+
+[project.scripts]
+macro_regime_classifier = "macro_regime_classifier.__main__:main"
+
+[project.urls]
+Homepage = "https://github.com/aviasthana1/macro-regime-classifier"
+Issues = "https://github.com/aviasthana1/macro-regime-classifier/issues"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/macro_regime_classifier"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers --strict-config"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+ignore = ["I001"]
